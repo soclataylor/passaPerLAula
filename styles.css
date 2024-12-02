@@ -1,0 +1,120 @@
+body 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    background-attachment: fixed; 
+    background-size: cover;
+
+}
+
+.logo
+{
+    margin-top: 0;
+    width: 800px;
+    margin:0 auto;
+}
+
+nav
+{
+    background-color:yellow;
+}
+
+.rosco-container 
+{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 50px;
+    flex-wrap: wrap;
+}
+
+.rosco-section 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rosco 
+{
+    position: relative;
+    width: 600px;
+    height: 600px;
+}
+
+.equip-name 
+{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.letter 
+{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #219ebc;
+    font-weight: bold;
+    font-size: 24px;
+    color: white;
+    margin: 5px; /* Afegeix distància entre les lletres */
+}
+
+.current 
+{
+    border: 5px solid #ffb703; /* Contorn groc sense fer més gran la lletra */
+}
+
+.correct 
+{
+    background-color: #80ed99;
+}
+
+.wrong 
+{
+    background-color: #e63946;
+}
+
+.inactive 
+{
+    opacity: 0.5; /* Lletres de l'equip que no està jugant */
+}
+
+.controls 
+{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+button 
+{
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#timer1, #timer2 
+{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
