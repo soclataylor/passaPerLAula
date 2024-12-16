@@ -13,35 +13,46 @@
         <button id="reset">Reiniciar Joc</button>
     </nav>
     
-    <div class="rosco-container">
+    <div class="rosco-container" style="margin-top:-10px;">
         <div class="rosco-section">
             <div id="rosco1" class="rosco">
-                <div class="equip-name">Equip 1</div>
-                <div id="timer1" class="rosco-info">Temps: 60s</div>
-                <div id="encerts1" class="rosco-info">Encerts: 0</div>
-                <div id="errors1" class="rosco-info">Errors: 0</div>
+                <div class="equip-dades">
+                    <div class="nom_equip">Equip 1</div>
+                    <div id="timer1">Temps: 60s</div>
+                    <div id="encerts1">Encerts: 0</div>
+                    <div id="errors1">Errors: 0</div>
+
+                    <div class="controls">
+                        <button id="encerta1" class="encerta">OK!</button>
+                        <button id="falla1" class="falla">KO!</button>
+                        <button id="passa1" class="pass">PASS</button>
+                    </div>
+                </div>
             </div>
-            <div class="controls">
-                <button id="encerta1">ENCERTA!</button>
-                <button id="falla1">FALLA!</button>
-                <button id="passa1">PASSA TORN</button>
-            </div>
+            
         </div>
         <div class="rosco-section">
             <div id="rosco2" class="rosco">
-                <div class="equip-name">Equip 2</div>
-                <div id="timer2" class="rosco-info">Temps: 60s</div>
-                <div id="encerts2" class="rosco-info">Encerts: 0</div>
-                <div id="errors2" class="rosco-info">Errors: 0</div>
+                <div class="equip-dades">
+                    <div class="nom_equip">Equip 2</div>
+                    <div id="timer2">Temps: 60s</div>
+                    <div id="encerts2">Encerts: 0</div>
+                    <div id="errors2">Errors: 0</div>
+
+                    <div class="controls">
+                        <button id="encerta2" class="encerta">OK!</button>
+                        <button id="falla2" class="falla">KO!</button>
+                        <button id="passa2" class="pass">PASS</button>
+                    </div>
+                </div>
             </div>
-            <div class="controls">
-                <button id="encerta2">ENCERTA!</button>
-                <button id="falla2">FALLA!</button>
-                <button id="passa2">PASSA TORN</button>
-            </div>
+           
         </div>
     </div>
     
+    <footer>
+        <p>Desenvolupat al 2024 per Mariona Batalla Taylor. Darrera actualització: 16/12/2024.</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
