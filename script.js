@@ -4,10 +4,10 @@ let indexLletra2 = 0;
 let temps1 = 60;
 let temps2 = 60;
 let interval1, interval2;
-let equipActiu = 'equip1'; // Equip inicial
+let equipActiu = 'equip1'; //Equip inicial
 let encerts1 = 0, errors1 = 0;
 let encerts2 = 0, errors2 = 0;
-const MAX_PARAULES = 25; // Límit d'encerts/errors per equip
+const MAX_PARAULES = 25; //Límit d'encerts/errors per equip (nombre de lletres del "rosco")
 
 let finalitzatEquip1 = false; //controlem si un dels equips ha finalitzat
 let finalitzatEquip2 = false;
@@ -26,17 +26,17 @@ document.addEventListener('DOMContentLoaded', () =>
     marcarLletra(indexLletra2, 'equip2');
     actualitzarTransparencia(equipActiu);
 
-    // Controls per l'Equip 1
+    //Controls per l'Equip 1
     document.querySelector('#encerta1').addEventListener('click', () => encerta('equip1'));
     document.querySelector('#falla1').addEventListener('click', () => falla('equip1'));
     document.querySelector('#passa1').addEventListener('click', () => passaTorn('equip1', 'equip2'));
 
-    // Controls per l'Equip 2
+    //Controls per l'Equip 2
     document.querySelector('#encerta2').addEventListener('click', () => encerta('equip2'));
     document.querySelector('#falla2').addEventListener('click', () => falla('equip2'));
     document.querySelector('#passa2').addEventListener('click', () => passaTorn('equip2', 'equip1'));
 
-    // Afegir el control per començar el concurs
+    //Afegir el control per començar el concurs
     document.querySelector('#comencar').addEventListener('click', () => {
         iniciarConcurs();
     });
@@ -56,7 +56,7 @@ function generarRosco(container, equip)
         letterDiv.setAttribute('data-index', index);
         letterDiv.setAttribute('data-equip', equip);
 
-        const angle = index * angleIncrement - Math.PI / 2; // Fa que la "A" estigui a dalt
+        const angle = index * angleIncrement - Math.PI / 2; //Fa que la "A" estigui a dalt
         const x = radius * Math.cos(angle) + 300 - 30;
         const y = radius * Math.sin(angle) + 300 - 30;
 
@@ -80,23 +80,23 @@ function encerta(equip)
     const indexActual = equip === 'equip1' ? indexLletra1 : indexLletra2;
     const lletraActual = document.querySelector(`.letter[data-equip="${equip}"][data-index="${indexActual}"]`);
 
-    // Marcar la lletra com encertada
+    //Marcar la lletra com encertada
     lletraActual.classList.add('correct');
 
-    // Actualitzar el recompte d'encerts
+    //Actualitzar el recompte d'encerts
     if (equip === 'equip1') 
     {
         encerts1++;
         document.getElementById('encerts1').textContent = `Encerts: ${encerts1}`;
-        verificarLimit('equip1');  // Comprovar si l'equip ha arribat al límit
-        seleccionarSeguentLletra('equip1');  // Continuar amb la següent lletra de l'equip 1
+        verificarLimit('equip1'); //Commprovem si l'equip ha arribat al límit
+        seleccionarSeguentLletra('equip1');   //Continuem amb la següent lletra de l'equip 1
     } 
     else
     {
         encerts2++;
         document.getElementById('encerts2').textContent = `Encerts: ${encerts2}`;
-        verificarLimit('equip2');  // Comprovar si l'equip ha arribat al límit
-        seleccionarSeguentLletra('equip2');  // Continuar amb la següent lletra de l'equip 2
+        verificarLimit('equip2');  //Commprovem si l'equip ha arribat al límit
+        seleccionarSeguentLletra('equip2');  //Continuem amb la següent lletra de l'equip 2
     }
 }
 
@@ -105,16 +105,16 @@ function falla(equip)
     const indexActual = equip === 'equip1' ? indexLletra1 : indexLletra2;
     const lletraActual = document.querySelector(`.letter[data-equip="${equip}"][data-index="${indexActual}"]`);
 
-    // Marcar la lletra com incorrecta
+    //Marquem la lletra com incorrecta
     lletraActual.classList.add('wrong');
 
-    // Actualitzar el recompte d'errors
+    //Actualitzem el recompte d'errors
     if (equip === 'equip1') 
     {
         errors1++;
         document.getElementById('errors1').textContent = `Errors: ${errors1}`;
         verificarLimit('equip1');
-        // Només canviar lletra per l'equip 1 si l'equip 2 no ha fallat
+        //només canviar lletra per l'equip 1 si l'equip 2 no ha fallat
     } 
     else 
     {
@@ -123,19 +123,26 @@ function falla(equip)
         verificarLimit('equip2');
     }
 
-    // Passar torn a l'altre equip
-    passaTorn(equip, equip === 'equip1' ? 'equip2' : 'equip1');  
+    //només passarà torn a l'altre equip si tots dos equips segueixen jugant:
+    if(quedaUnSolEquip)
+    {
+        seleccionarSeguentLletra(equip);
+    }
+    else
+    {
+         //PAssem el torn a l'altre equip
+        passaTorn(equip, equip === 'equip1' ? 'equip2' : 'equip1');  
+    }
+   
 }
 
-
-
-// Passa el torn d'un equip a l'altre i gestiona l'activació de botons
+//Passa el torn d'un equip a l'altre i gestiona l'activació de botons
 function passaTorn(equipPassa, equipNou) 
 {
-    // Comprovar si l'equip que rep el torn ja ha acabat
+
+    //Comprovem si l'equip que rep el torn ja ha acabat
     const contestadesEquipPassa = document.querySelectorAll(`.letter[data-equip="${equipPassa}"].correct, .letter[data-equip="${equipPassa}"].wrong`).length;
     const contestadesEquipNou = document.querySelectorAll(`.letter[data-equip="${equipNou}"].correct, .letter[data-equip="${equipNou}"].wrong`).length;
-    //const contestades = document.querySelectorAll(`.letter[data-equip="${equipNou}"].correct, .letter[data-equip="${equipNou}"].wrong`).length;
 
     if (contestadesEquipNou >= lletres.length) 
     {
@@ -145,7 +152,7 @@ function passaTorn(equipPassa, equipNou)
             if (equipNou === 'equip1') finalitzatEquip1 = true;
             if (equipNou === 'equip2') finalitzatEquip2 = true;
         }
-        return; // No passar el torn si l'equip ja ha acabat
+        return; //No passa el torn el si l'equip ja ha acabat
     }
 
     if (contestadesEquipPassa >= lletres.length) 
@@ -162,17 +169,23 @@ function passaTorn(equipPassa, equipNou)
         return;
     }
 
-    // Només seleccionar la següent lletra per l'equip que passa el torn
+    if(quedaUnSolEquip)
+    {
+        seleccionarSeguentLletra(equipPassa);
+        return;
+    }
+
+    //Només seleccionem la següent lletra per l'equip que passa el torn
     seleccionarSeguentLletra(equipPassa); 
 
-    // Actualitzar la transparència de les lletres segons l'equip actiu
+    //Actualitzem la transparència de les lletres segons l'equip actiu
     actualitzarTransparencia(equipNou);
 
     //Reiniciem el cronòmetre de l'equip que acaba de jugar  
-    // Iniciar el cronòmetre del nou equip
+    //Iniciem el cronòmetre del nou equip
     iniciarCronometre(equipNou);
 
-    // Desactivar els botons de l'equip que passa el torn i activar els de l'altre equip
+    //Desactivem els botons de l'equip que passa el torn i activar els de l'altre equip
     desactivarBotons(equipPassa);
     activarBotons(equipNou);
 }
@@ -209,11 +222,13 @@ function actualitzarTemps(equip)
             alert('Temps esgotat per l\'Equip 1!');
             passaTorn('equip1', 'equip2');
         }
-    } else if (equip === 'equip2' && equipActiu === 'equip2') 
-        {
+    } 
+    else if (equip === 'equip2' && equipActiu === 'equip2') 
+    {
         temps2--;
         document.getElementById('timer2').textContent = `Temps: ${temps2}s`;
-        if (temps2 <= 0) {
+        if (temps2 <= 0) 
+        {
             clearInterval(interval2);
             alert('Temps esgotat per l\'Equip 2!');
             passaTorn('equip2', 'equip1');
@@ -224,87 +239,88 @@ function actualitzarTemps(equip)
 function iniciarCronometre(equip) 
 {
     const timerElement = document.getElementById(`timer${equip === 'equip1' ? '1' : '2'}`);
-    let temps = 60; // Iniciar amb 60 segons
+    let temps = 60; //Iniciem amb 60 segons
 
-    // Actualitzar el cronòmetre cada segon
+    //Actualitzem el cronòmetre cada segon
     const interval = setInterval(() => 
     {
         temps--;
         timerElement.textContent = `Temps: ${temps}s`;
 
-        if (temps <= 0) {
+        if (temps <= 0) 
+        {
             clearInterval(interval);
             alert(`El temps s'ha acabat per a l'equip ${equip}!`);
-            // Passar torn
+            //PAssem torn
             passaTorn(equip, equip === 'equip1' ? 'equip2' : 'equip1');
         }
     }, 1000);
 
-    // Aturar el cronòmetre de l'altre equip si està en marxa
+    //Aturem el cronòmetre de l'altre equip si està en marxa
     if (equip === 'equip1') 
     {
-        clearInterval(interval2); // Atura el cronòmetre de l'equip 2
-        interval1 = interval; // Assignar el nou interval a interval1
+        clearInterval(interval2); //Aturem  el cronòmetre de l'equip 2
+        interval1 = interval; //Assignem el nou interval a interval1
     } 
     else 
     {
-        clearInterval(interval1); // Atura el cronòmetre de l'equip 1
-        interval2 = interval; // Assignar el nou interval a interval2
+        clearInterval(interval1); //Aturem el cronòmetre de l'equip 1
+        interval2 = interval; //Assignem el nou interval a interval2
     }
 }
 
 function iniciarConcurs() 
 {
-    // Iniciar temporitzador per a l'equip 1, ja que és l'equip inicial
+    //Iniciem el temporitzador per a l'equip 1, ja que és l'equip inicial
     iniciarCronometre('equip1');
     
-    // Desactivar el botó de començar per evitar que es torni a prémer
+    //Desactivem el botó de començar per evitar que es torni a prémer
     document.querySelector('#comencar').disabled = true;
 }
 
 function reiniciarJoc() 
 {
-    // Restableix els valors de les variables
+    //Restablim els valors de les variables
     encerts1 = 0;
     errors1 = 0;
     encerts2 = 0;
     errors2 = 0;
-    indexLletra1 = 0; // Torna a la lletra 'A'
-    indexLletra2 = 0; // Torna a la lletra 'A'
+    indexLletra1 = 0; //Tornem a la lletra 'A'
+    indexLletra2 = 0; //Tornem a la lletra 'A'
 
-    // Actualitzar la interfície
+    //Actualitzem la interfície
     document.getElementById('encerts1').textContent = `Encerts: ${encerts1}`;
     document.getElementById('errors1').textContent = `Errors: ${errors1}`;
     document.getElementById('encerts2').textContent = `Encerts: ${encerts2}`;
     document.getElementById('errors2').textContent = `Errors: ${errors2}`;
 
-    // Reiniciar les lletres
+    //Reiniciem les lletres
     const lletres = document.querySelectorAll('.letter');
     lletres.forEach(lletra => 
     {
         lletra.classList.remove('correct', 'wrong');
     });
 
-    // Reiniciar els cronòmetres
+    //REiniciem els cronòmetres
     clearInterval(interval1);
     clearInterval(interval2);
 
-    // Marcar la lletra 'A' com activa per a l'equip 1
+    //Marquem la lletra 'A' com activa per a l'equip 1
     marcarLletra(indexLletra1, 'equip1');
     
-    // Marcar la lletra 'A' com activa per a l'equip 2
+    //Marquem la lletra 'A' com activa per a l'equip 2
     marcarLletra(indexLletra2, 'equip2');
 
-    // Reiniciar el color de les lletres actives
-    actualitzarTransparencia('equip1'); // Seleccionar l'equip 1 com a actiu
+    //Reiniciem el color de les lletres actives
+    actualitzarTransparencia('equip1'); //Seleccione,m l'equip 1 com a actiu
 
-    // Assignar l'equip 1 com a l'equip actiu
+    //Assignem l'equip 1 com a l'equip actiu
     equipActiu = 'equip1';
 }
 
 function verificarLimit(equip) 
 {
-    // Comprovar les lletres encertades i fallades
+    //Comprovem les lletres encertades i fallades
     const letters = document.querySelectorAll(`.letter[data-equip="${equip}"]`);
     let contestades = 0;
 
@@ -316,7 +332,7 @@ function verificarLimit(equip)
         }
     });
 
-    // Si s'han contestat totes les lletres (encertades o fallades)
+    //SI han contestat totes les lletres (encertades o fallades)
     if (contestades >= lletres.length) 
     {
          //només s'ha de mostrar la primera vegada:
@@ -325,23 +341,36 @@ function verificarLimit(equip)
             if (equip === 'equip1') finalitzatEquip1 = true; //actualitzem la variable d'equip finalitzat
             if (equip === 'equip2') finalitzatEquip2 = true;
 
+            //si un dels dos equips ha acabat:
+            if( finalitzatEquip1 || finalitzatEquip2)
+            {
+                //actualitzem la variable que ens indica que només hi ha un equip jugant:
+                quedaUnSolEquip=true;
+            }
+
             //Forcem l'actualització del DOM abans de mostrar l'alerta
             setTimeout(() => 
             {
-                alert(`L'equip ${equip} ha finalitzat!`);
+                if(!quedaUnSolEquip)
+                {
+                    alert(`L'equip ${equip} ha finalitzat!`); //que només mostri l'alerta quan finalitzi el primer equip
+                }
+                
             }, 0);
         }
 
-        desactivarBotons(equip);  // Desactivar els botons de l'equip que ha arribat al final
+        desactivarBotons(equip);  //desactivem els botons de l'equip que ha arribat al final
         
-        // Comprovar si l'altre equip també ha acabat
+        //comprovem si l'altre equip també ha acabat
         const equipAltres = equip === 'equip1' ? 'equip2' : 'equip1';
         const altresContestades = document.querySelectorAll(`.letter[data-equip="${equipAltres}"].correct, .letter[data-equip="${equipAltres}"].wrong`).length;
 
-        // Si l'altre equip també ha acabat, el joc s'acaba
+        //Si l'altre equip també ha acabat, el joc s'acaba
         if (altresContestades >= lletres.length) 
         {
             alert('El joc ha acabat!');
+            let qui=quiguanya();
+            alert("L'equip guanyador és "+qui);
         }
 
         else //si l'altre equip no ha finalitzat
@@ -356,27 +385,28 @@ function verificarLimit(equip)
     }
 }
 
-// Selecciona la següent lletra no encertada de l'equip actual
+//Seleccionem la següent lletra no encertada de l'equip actual
 function seleccionarSeguentLletra(equip) 
 {
     let indexActual = equip === 'equip1' ? indexLletra1 : indexLletra2;
     let intents=0;
 
-    // Seleccionar la següent lletra que no hagi estat encertada o fallada
-    do {
-        indexActual = (indexActual + 1) % lletres.length; // Avançar a la següent lletra
+    //Seleccionem la següent lletra que no hagi estat encertada o fallada
+    do 
+    {
+        indexActual = (indexActual + 1) % lletres.length; //Avancem a la següent lletra
         intents++; //
         if (intents > lletres.length) //perquè no es quedi en un bucle infinit si un equip acaba el rosco
         {
             console.warn(`Totes les lletres han estat contestades per ${equip}, no es pot seleccionar cap altra lletra.`);
-            return; // Sortir de la funció per evitar bucle infinit
+            return; //Sortim de la funció per evitar bucle infinit
         }
     } while (
         document.querySelector(`.letter[data-equip="${equip}"][data-index="${indexActual}"]`).classList.contains('correct') || 
         document.querySelector(`.letter[data-equip="${equip}"][data-index="${indexActual}"]`).classList.contains('wrong')
     );
 
-    // Actualitzar l'índex corresponent
+    //ACtualtizem l'índex corresponent
     if (equip === 'equip1') 
     {
         indexLletra1 = indexActual;
@@ -389,7 +419,7 @@ function seleccionarSeguentLletra(equip)
     marcarLletra(indexActual, equip);
 }
 
-// Desactiva els botons de l'equip especificat
+//Desacrtivem els botons de l'equip especificat
 function desactivarBotons(equip) 
 {
     document.querySelector(`#encerta${equip === 'equip1' ? 1 : 2}`).disabled = true;
@@ -397,7 +427,7 @@ function desactivarBotons(equip)
     document.querySelector(`#passa${equip === 'equip1' ? 1 : 2}`).disabled = true;
 }
 
-// Activa els botons de l'equip especificat
+//ACtivem els botons de l'equip especificat
 function activarBotons(equip) 
 {
     document.querySelector(`#encerta${equip === 'equip1' ? 1 : 2}`).disabled = false;
@@ -405,5 +435,12 @@ function activarBotons(equip)
     document.querySelector(`#passa${equip === 'equip1' ? 1 : 2}`).disabled = false;
 }
 
-// Event listener per al botó de reinici
+//Event listener per al botó de reinici
 document.getElementById('reset').addEventListener('click', reiniciarJoc);
+
+//Funció que determina qui guanya:
+function quiguanya()
+{
+    //retornarà el valor de l'equip guanyador
+    //guanya qui m és encerts tingui
+}
