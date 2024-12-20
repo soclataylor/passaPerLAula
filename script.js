@@ -139,6 +139,12 @@ function falla(equip)
 //Passa el torn d'un equip a l'altre i gestiona l'activació de botons
 function passaTorn(equipPassa, equipNou) 
 {
+    if (quedaUnSolEquip) //si només queda un equip
+    {
+        //continua jugant
+        seleccionarSeguentLletra(equipPassa);
+        return;
+    }
 
     //Comprovem si l'equip que rep el torn ja ha acabat
     const contestadesEquipPassa = document.querySelectorAll(`.letter[data-equip="${equipPassa}"].correct, .letter[data-equip="${equipPassa}"].wrong`).length;
@@ -338,6 +344,8 @@ function verificarLimit(equip)
          //només s'ha de mostrar la primera vegada:
         if ((equip === 'equip1' && !finalitzatEquip1) || (equip === 'equip2' && !finalitzatEquip2)) 
         {
+            alert(`L\'equip ${equip} ha finalitzat!`);
+
             if (equip === 'equip1') finalitzatEquip1 = true; //actualitzem la variable d'equip finalitzat
             if (equip === 'equip2') finalitzatEquip2 = true;
 
@@ -346,17 +354,7 @@ function verificarLimit(equip)
             {
                 //actualitzem la variable que ens indica que només hi ha un equip jugant:
                 quedaUnSolEquip=true;
-            }
-
-            //Forcem l'actualització del DOM abans de mostrar l'alerta
-            setTimeout(() => 
-            {
-                if(!quedaUnSolEquip)
-                {
-                    alert(`L'equip ${equip} ha finalitzat!`); //que només mostri l'alerta quan finalitzi el primer equip
-                }
-                
-            }, 0);
+            }    
         }
 
         desactivarBotons(equip);  //desactivem els botons de l'equip que ha arribat al final
@@ -368,16 +366,28 @@ function verificarLimit(equip)
         //Si l'altre equip també ha acabat, el joc s'acaba
         if (altresContestades >= lletres.length) 
         {
-            alert('El joc ha acabat!');
-            let qui=quiguanya();
-            alert("L'equip guanyador és "+qui);
+            //marquem la darrera lletra correctament:
+            const indexActual=equip==='equip1'? indexLletra1 : indexLletra2;
+            const lletraActual=document.querySelector(`.letter[data-equip="${equip}"][data-index="${indexActual}"]`);
+            
+            //marquel la darrera lletra segons si és OK o KO:
+            if(!lletraActual.classList.contains('correct')&&!lletraActual.classList.contains('wrong'))
+            {
+                lletraActual.classList.add('wrong');
+            }
+                setTimeout(() =>  //fem timeout perquè si no mostra l'alerta abans de pintar la lletra corresponent
+                {
+                    alert('El joc ha acabat!');
+                    let guanyador = quiguanya();
+                    alert("L'equip guanyador és " + guanyador);
+                }, 0);
         }
 
         else //si l'altre equip no ha finalitzat
         {
-            if (equipActiu === equip) 
+            //Després de finalitzar l'equip, activem l'altre
+            if (!finalitzatEquip1 || !finalitzatEquip2) 
             {
-                equipActiu = equipAltres; //canviem d'equip perquè l'equip actiu ha acabat.
                 activarBotons(equipAltres);
                 actualitzarTransparencia(equipAltres);
             }
@@ -441,6 +451,10 @@ document.getElementById('reset').addEventListener('click', reiniciarJoc);
 //Funció que determina qui guanya:
 function quiguanya()
 {
+    let equipGuanyador;
+
     //retornarà el valor de l'equip guanyador
-    //guanya qui m és encerts tingui
+    //guanya qui més encerts i menys errors tingui
+    (encerts1>encerts2)? equipGuanyador="EQUIP 1": equipGuanyador="EQUIP 2";
+    return equipGuanyador;
 }
