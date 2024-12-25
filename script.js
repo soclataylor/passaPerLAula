@@ -139,6 +139,20 @@ function falla(equip)
 //Passa el torn d'un equip a l'altre i gestiona l'activació de botons
 function passaTorn(equipPassa, equipNou) 
 {
+     //Reiniciem crono a 60s
+     if (equipPassa === 'equip1') 
+    {
+        clearInterval(interval1); //aturem crono equip 1
+        temps1 = 60; //reiniciem el temps
+        document.getElementById('timer1').textContent = `Temps: ${temps1}s`; //actualitzem el valor a la interfície
+    } 
+    else 
+    {
+        clearInterval(interval2); //aturem crono equip2
+        temps2 = 60; //reiniciem el temps
+        document.getElementById('timer2').textContent = `Temps: ${temps2}s`; //actualitzem el valor a la interfície
+    }
+
     if (quedaUnSolEquip) //si només queda un equip
     {
         //continua jugant
@@ -458,3 +472,59 @@ function quiguanya()
     (encerts1>encerts2)? equipGuanyador="EQUIP 1": equipGuanyador="EQUIP 2";
     return equipGuanyador;
 }
+
+
+//Per mostrar o amagar les seccions //
+function mostrarSeccio(idSeccio) 
+{
+    //D'inici, totes les seccions es troben amagades:
+    const seccions = document.querySelectorAll('.seccio');
+    seccions.forEach(seccio => 
+    {
+        seccio.classList.remove('visible');
+        seccio.classList.add('ocult');
+    });
+
+     //Mostrem la capa de fons
+     document.querySelector('.fons').style.display = 'block';
+
+    //Mostrem la seccio seleccionada:
+    const seccioAMostrar = document.getElementById(idSeccio);
+    seccioAMostrar.classList.add('visible');
+    seccioAMostrar.classList.remove('ocult');
+    seccioAMostrar.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Amagar secció i capa de fons
+document.querySelector('.fons').addEventListener('click', () => 
+{
+    document.querySelectorAll('.seccio').forEach(seccio =>
+    {
+        seccio.classList.remove('visible');
+        seccio.classList.add('ocult');
+    });
+    document.querySelector('.fons').style.display = 'none';
+});
+
+document.querySelectorAll('.tancar').forEach(btn => 
+{
+    btn.addEventListener('click', () => {
+        document.querySelector('.fons').style.display = 'none';
+        document.querySelectorAll('.seccio').forEach(seccio =>
+        {
+            seccio.classList.remove('visible');
+            seccio.classList.add('ocult');
+        });
+    });
+});
+
+// Enllaços de navegació
+document.getElementById('instruccions_link').addEventListener('click', () => mostrarSeccio('instruccions'));
+document.getElementById('sobre_link').addEventListener('click', () => mostrarSeccio('sobre'));
+document.getElementById('llicencia_link').addEventListener('click', () => mostrarSeccio('llicencia'));
+document.getElementById('contribueix_link').addEventListener('click', () => mostrarSeccio('contribueix'));
+
+/*************************************PER FER
+    - Acabar de retocar la finalització dels cronòmetres quan passa de torn
+    - 
+*/
