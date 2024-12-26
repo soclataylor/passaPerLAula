@@ -1,4 +1,4 @@
-# 🎉 Passaparaula Educatiu 🎉
+# 🎉 PassaPerL'Aula 🎉
 
 _Aquesta eina educativa permet consolidar conceptes de forma lúdica i competitiva a l'aula._
 
