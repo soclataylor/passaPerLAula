@@ -1,9 +1,9 @@
-# 🎉 Passaparaula Educatiu 🎉
+# 🎉 PassaPerL'Aula 🎉
 
 _Aquesta eina educativa permet consolidar conceptes de forma lúdica i competitiva a l'aula._
 
 ## 📘 **Sobre aquest projecte**
-Sóc **Mariona Batalla**, professora d'informàtica de FP. Aquest projecte va néixer a l'aula com una activitat per consolidar els conceptes treballats a classe. La idea inicial era crear una forma més lúdica d'acabar el tema i repassar abans de l'examen.
+Soc la **Mariona Batalla**, professora d'informàtica de FP. Aquest projecte va néixer a l'aula com una activitat per consolidar els conceptes treballats a classe. La idea inicial era crear una forma més lúdica d'acabar el tema i repassar abans de l'examen.
 
 Quan vaig fer la primera prova a l'aula, vaig veure que l'activitat **funcionava molt bé**:
 - 🌟 **Competitivitat positiva**: L'alumnat mostrava molta motivació per encertar totes les paraules.  
@@ -26,7 +26,7 @@ Aquest projecte, que inicialment va començar com una eina personal, ha cridat l
      🔹 **"Conté la lletra X"** (la lletra pot aparèixer a qualsevol lloc dins la paraula).  
    - **Exemples**:  
      🔹 **Comença amb la T**: "Aparell que utilitzem per parlar a distància" → **Telèfon**.  
-     🔹 **Conté la G**: "Objecte que utilitzem per escriure sobre paper" → **Bolígraf** (la G està al mig de la paraula).  
+     🔹 **Conté la G**: "Objecte que utilitzem per escriure sobre paper" → **Bolígraf** (la G és al mig de la paraula).  
 6. **Passar el torn**:  
    - Si els jugadors no saben la resposta, poden passar el torn.  
    - Quan el torn torni al seu equip, segueixen amb la propera lletra i la que han passat queda pendent.
