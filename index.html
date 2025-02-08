@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PASSAPERL'AULA by Mariona Batalla Taylor</title>
+    <meta name="description" content="PassaPerL'Aula: joc educatiu en forma de concurs per consolidar els conceptes treballats a l'aula. Aquesta eina ajuda als professors a repassar conceptes de forma lúdica.">
+    <meta name="keywords" content="passaperl'aula, passaparaula, joc educatiu, informàtica, professors, consolidar conceptes, exàmens, educació, fp, formació professional, cicles formatius, gamificació">
+    <meta name="author" content="Mariona Batalla Taylor">
+
+    <!-- Metadades OpenGraph per a compartir a xarxes socials -->
+    <meta property="og:title" content="PassaPerL'Aula: Joc Per Consolidar Conceptes a Classe">
+    <meta property="og:description" content="Aquesta eina educativa en forma de concurs permet als professors consolidar els conceptes treballats a classe de forma lúdica.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://soclataylor.cat/passaperlaula">
+    <meta property="og:image" content="https://socaltaylor.cat/imatge-compartir.png">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B8BM2TLW6W"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-B8BM2TLW6W');
+</script>
+
+    <link rel="stylesheet" href="style/styles.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+</head>
+<body>
+    <h1><img src="img/passaperlaula.png" alt="Logotip de  PassaPerL'Aula" class="logo"></h1>
+
+    <nav class="prefooter" id="top">
+        <ul>
+            <li id="instruccions_link">Instruccions</li>
+            <li id="sobre_link">Quant al projecte</li>
+            <li id="llicencia_link">Llicència</li>
+            <li id="contribueix_link">Contribueix</li>
+        </ul>
+    </nav>
+
+    <div id="desktop-warning">
+        <p>Aquesta eina està pensada per jugar-la en un ordinador de sobretaula. Si us plau, utilitzeu un ordinador de sobretaula.</p>
+    </div>
+
+    <div id="imatge_passaperlaula">
+        <img src="img/aula_passaperlaula.jpeg" alt="Imatge del joc PassaPerL'Aula" class="imatge_passaperlaula">
+    </div>
+
+    <nav>
+        <button id="comencar">Comença el Concurs</button>
+        <button id="reset">Reiniciar Joc</button>
+    </nav>
+
+    
+    <div class="rosco-container" style="margin-top:-10px;">
+        <div class="rosco-section">
+            <div id="rosco1" class="rosco">
+                <div class="equip-dades">
+                    <div class="nom_equip">Equip 1</div>
+                    <div id="timer1">Temps: 60s</div>
+                    <div id="encerts1">Encerts: 0</div>
+                    <div id="errors1">Errors: 0</div>
+
+                    <div class="controls">
+                        <button id="encerta1" class="encerta">OK!</button>
+                        <button id="falla1" class="falla">KO!</button>
+                        <button id="passa1" class="pass">PASS</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="rosco-section">
+            <div id="rosco2" class="rosco">
+                <div class="equip-dades">
+                    <div class="nom_equip">Equip 2</div>
+                    <div id="timer2">Temps: 60s</div>
+                    <div id="encerts2">Encerts: 0</div>
+                    <div id="errors2">Errors: 0</div>
+
+                    <div class="controls">
+                        <button id="encerta2" class="encerta">OK!</button>
+                        <button id="falla2" class="falla">KO!</button>
+                        <button id="passa2" class="pass">PASS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--fi del rosco container-->
+
+    <div class="fons"></div>
+
+    <section id="instruccions" class="seccio ocult">
+        <button class="tancar">✖</button>
+        <h2>Instruccions del joc</h2>
+        <ul>
+            <li>Hi ha <b>dos equips</b> que competeixen.</li>
+            <li>Cada equip té <b>60 segons per torn</b>. Quan el temps s'esgota, el torn passa a l'altre equip.</li>
+            <li>El primer torn sempre comença amb l'<b>Equip 1</b>.</li>
+            <li>Els encerts es marquen en <b>verd</b>, i les errades en <b>vermell</b>.</li>
+
+            <li><b>Mecànica del concurs</b>:  
+                <ul><li>- A cada lletra, el professor llegeix una definició i els jugadors han d'endevinar la paraula corresponent.</li>
+                    <li>- Per cada lletra de la rosca, pot haver-hi dues opcions: 
+                        <ul>
+                            <li>"Comença amb la lletra X": La paraula ha de començar per la lletra indicada.</li>
+                            <li>"Conté la lletra X": La lletra pot aparèixer en qualsevol lloc dins de la paraula, però no necessàriament al principi.</li></ul></li>
+                    <li>- Exemples:  
+                        <ul>
+                            <li>Comença amb la T: "Aparell que utilitzem per parlar a distància" → Telèfon. </li>
+                            <li>Conté la G: "Objecte que utilitzem per escriure sobre paper" → Bolígraf (la G és al mig de la paraula). </li></ul></li>
+                </ul> 
+            </li>
+            <li>Els jugadors poden passar el torn si no saben la resposta o necessiten més temps per pensar, i aquella lletra queda pendent de contestar.</li>
+            <li>El professorat pot personalitzar les paraules segons les seves necessitats.</li>
+            <li>Podeu utilitzar la <b>plantilla de Google Docs que utilitzo jo</b> per preparar les definicions de les paraules. Descarregueu-la o feu-ne una còpia des d'aquest enllaç:  
+            <a href="https://docs.google.com/document/d/1Wli4OaGgubrqptrRlmRdR06rUSJ98mmHwt9Qhc7ttW8/edit?usp=sharing" target="_blank">Accediu a la plantilla de Google Docs</a></li>
+        </ul>
+    </section>
+
+    <section id="sobre" class="seccio ocult">
+        <button class="tancar">✖</button>
+        <h2>Quant al projecte</h2>
+        <p>Soc la Mariona Batalla Taylor, professora d'informàtica de FP.</p> 
+        
+        <p>Aquest projecte va néixer a l'aula com una activitat per consolidar conceptes treballats a classe, 
+            en el meu cas a la finalització de cada resultat d'aprenentatge.</p>
+
+        <p>Després de provar-ho a l'aula, vaig veure que l'activitat generava molta competitivitat i motivació. 
+            L'alumnat mostrava ganes d'encertar totes les paraules, i això va fomentar habilitats com la 
+            cooperació, l'escolta activa i la presa de decisions grupals.</p>
+        
+        <p>El que va començar com una eina personal, es va convertir en un projecte que va cridar l'atenció 
+            de companys i altres docents. Molts em van preguntar: "Com puc utilitzar-ho?", i això em va fer 
+            veure que valia la pena compartir aquesta eina amb la comunitat educativa.</p>
+        
+        <h3>Personalització del joc</h3>
+        <p>Una de les millors característiques d'aquesta eina és que cada professor pot personalitzar 
+            les paraules segons les seves necessitats. Podeu adaptar les paraules als conceptes de 
+            cada matèria o tema que estigueu treballant. Jo personalment faig servir una plantilla de Google Docs
+            amb totes les lletres de la A a la Z, on escric les definicions i paraules. 
+            Aquesta plantilla m'ajuda a tenir un guió per seguir i conduir el joc de manera ordenada.</p>
+
+        <p>Si voleu utilitzar la meva plantilla, la podeu copiar o descarregar des d'aquest enllaç:  
+        <a href="https://docs.google.com/document/d/1Wli4OaGgubrqptrRlmRdR06rUSJ98mmHwt9Qhc7ttW8/edit?usp=sharing" target="_blank">Accediu a la plantilla de Google Docs</a></p>
+
+        
+        <p>Espero que aquesta eina us sigui tan útil com ho ha estat per mi i el meu alumnat. Us animo a
+            utilitzar-la i a compartir-la amb altres docents que també la puguin necessitar.</p>
+
+        <h3>Compartiu la vostra experiència</h3>
+
+        <p>M'encantaria saber si heu utilitzat aquesta eina!</p>
+        <p>Si heu fet servir el PassaPerL'Aula a la vostra aula o en qualsevol entorn educatiu, us agrairia 
+            que em féssiu saber com ha anat l'experiència i seria genial si compartíssiu una foto o la 
+            vostra opinió a les xarxes socials.</p>
+
+        <p>Podeu escriure'm un correu electrònic o contactar-me a través de les xarxes socials.</p>
+        <p>Si us ha agradat, compartiu aquesta eina amb altres persones que creieu que la podrien utilitzar.</p>
+
+        <p>Correu electrònic: <a href="mailto:mariona.batalla.taylor@gmail.com">mariona.batalla.taylor@gmail.com</a></p>
+        <p>Seguiu-me a <a href="https://instagram.com/taylorslittlethings" target="_blank">Instagram</a>, 
+            <a href="https://twitter.com/soclataylor" target="_blank">Twitter</a>  
+            o <a href="https://www.linkedin.com/in/marionabatallataylor/" target="_blank">LinkedIn</a>.</p>
+    </section>
+
+    <section id="llicencia" class="seccio ocult">
+        <button class="tancar">✖</button>
+        <h2>Llicència</h2>
+        <p>Aquest projecte està publicat sota la llicència MIT. Això significa que podeu utilitzar, 
+            modificar i distribuir aquest projecte lliurement.</p>
+    </section>
+
+    <section id="contribueix" class="seccio ocult">
+        <button class="tancar">✖</button>
+        <h2>Com contribuir</h2>
+        <p>Si teniu idees de millora, podeu contribuir seguint aquests passos: Fer un fork, clonar <a href="https://github.com/soclataylor/passaPerLAula">el repositori de GitHub</a> i crear 
+            una pull request amb les vostres millores.</p>
+    </section>
+
+    
+    <footer>
+        <nav class="prefooter" id="bottom">
+            <ul>
+                <li id="instruccions_link">Instruccions del PassaPerL'Aula</li>
+                <li id="sobre_link">Sobre aquest projecte</li>
+                <li id="llicencia_link">Llicència</li>
+                <li id="contribueix_link">Contribueix</li>
+            </ul>
+        </nav>
+        <div id="footer_info">
+            <p>Desenvolupat al 2024 per Mariona Batalla Taylor sota Llicència MIT: Aquesta eina es posa a disposició de qui ho necessiti. |  Darrera actualització: 08/02/2025.</p>
+            <p>Compartiu-me la vostra experiència, si us plau! <a href="mailto:mariona.batalla.taylor@gmail.com">Aquí teniu el meu correu</a></p>
+        </div>
+    </footer>
+    <script src="script/script.js" defer></script>
+</body>
+</html>
